@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../domain/cart.dart';
+import '../presentation.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final Product product;
@@ -71,10 +72,8 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // Spacer para empujar el botón hacia abajo
-                  const Spacer(),
+                  const Spacer(),  // Spacer para empujar el botón hacia abajo
 
-                  // Botón de "Añadir al carrito" centrado y en la parte inferior de la columna
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton.icon(
@@ -83,13 +82,13 @@ class ProductDetailScreen extends StatelessWidget {
                         context.read<Cart>().addToCart(product);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('${product.title} added to cart!'),
+                            content: Text('${product.title} añadido al carrito'),
                             duration: const Duration(seconds: 1),
                           ),
                         );
                       },
                       icon: const Icon(Icons.shopping_cart),
-                      label: const Text('Add to Cart'),
+                      label: const Text('Añadir al carrito'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(0, 25, 118, 210),
                         padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
@@ -101,12 +100,14 @@ class ProductDetailScreen extends StatelessWidget {
               ),
             ),
 
-            // Imagen que ocupa el 40% derecho de la pantalla (ajustado aquí)
+            // Imagen que ocupa el 40% derecho de la pantalla
             SizedBox(
-              width: screenWidth * 0.4, // 40% del ancho de la pantalla
-              child: Image.network(
-                product.images[0],
-                fit: BoxFit.cover,
+              width: screenWidth * 0.4,
+              child: ProductImage(
+                height: screenWidth * 0.4,  // Ajusta el tamaño a la pantalla
+                width: screenWidth * 0.4,   // Ajusta el tamaño a la pantalla
+                tag: product.id.toString(),  // El mismo tag que en la lista
+                url: product.images[0],
               ),
             ),
           ],
@@ -115,3 +116,4 @@ class ProductDetailScreen extends StatelessWidget {
     );
   }
 }
+

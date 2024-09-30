@@ -80,19 +80,23 @@ class _ProductListBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = context.watch<Cart>();  // Accedemos al carrito desde el contexto
+    final cart = context.watch<Cart>();  
 
     return ListView.separated(
-      itemCount: productList.length - 2, // Reducimos el total en 1 para saltar el primer producto
+      itemCount: productList.length, 
       itemBuilder: (context, index) {
-        final product = productList[index + 2]; // Saltamos el primer elemento
+        final product = productList[index]; 
 
         return ProductItem(
+          
           product: product,
           onAddToCartPressed: () {
-            cart.addToCart(product);  // Si no está en el carrito, lo añadimos
+            cart.addToCart(product);
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('${product.title} añadido al carrito')),
+              SnackBar(
+                content: Text('${product.title} añadido al carrito'),
+                duration: const Duration(seconds: 1), 
+              ),
             );
           },
         );

@@ -23,6 +23,7 @@ class ProductItem extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
+        // Navegar a la pantalla de detalle usando Hero para transición
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -39,12 +40,13 @@ class ProductItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // Aquí está el widget Hero en la lista de productos
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: ProductImage(
                 height: 100.0,
                 width: 100.0,
-                tag: product.id.toString(),
+                tag: product.id.toString(),  // Usamos el ID del producto como tag único
                 url: product.images[0],
               ),
             ),
